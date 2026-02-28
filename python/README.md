@@ -73,7 +73,17 @@ ignore = [
 typeCheckingMode = "strict"
 ```
 
-VS Code users: Install the **Ruff** and **Pyright** extensions for editor support.
+To run these tools from the command line:
+
+```bash
+uv run ruff check <file_or_dir>
+uv run ruff check --fix <file_or_dir>
+uv run ruff format <file_or_dir>
+uv run pyright <file_or_dir>
+```
+
+### VS Code integration
+Install the **Ruff** and **Pyright** extensions for editor support.
 
 **Add** to `.vscode/settings.json`
 
@@ -87,15 +97,6 @@ VS Code users: Install the **Ruff** and **Pyright** extensions for editor suppor
     }
   }
 }
-```
-
-To run these tools from the command line:
-
-```bash
-uv run ruff check <file_or_dir>
-uv run ruff check --fix <file_or_dir>
-uv run ruff format <file_or_dir>
-uv run pyright <file_or_dir>
 ```
 
 ## Project structure
@@ -142,7 +143,8 @@ Install [ipykernel](https://ipykernel.readthedocs.io/) for Jupyter Notebook supp
 uv add --dev ipykernel
 ```
 
-VS Code users: Install the **Jupyter** extension for notebook support.
+### VS Code integration
+Install the **Jupyter** extension for notebook support.
 
 **Add** to `.vscode/settings.json` for output scrolling:
 

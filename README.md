@@ -19,7 +19,7 @@ git config --local user.email "your.email@example.com"
 touch README.md Makefile .gitignore 
 ```
 
-VS Code users:
+### VS Code integration
 
 ```bash
 mkdir -p .vscode && touch .vscode/settings.json
@@ -41,6 +41,9 @@ git remote add origin git@github.com:your-account/<your-project-name>.git
 git branch -M main
 git push -u origin main
 ```
+
+### VS Code integration
+Install **GitLens** and **Git Graph** extensions for advanced Git UI.
 
 ## Conventional workflow
 
