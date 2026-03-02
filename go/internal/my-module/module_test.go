@@ -1,21 +1,17 @@
 package mymodule
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestMyFunction1(t *testing.T) {
 	t.Parallel()
-	expected := "Hello, World!"
-	result := MyFunction1()
-	if result != expected {
-		t.Errorf("MyFunction1() = %v; want %v", result, expected)
-	}
+	assert.Equal(t, "Hello, World!", MyFunction1(), "MyFunction1() should return 'Hello, World!'")
 }
 
 func TestMyFunction2(t *testing.T) {
 	t.Parallel()
-	expected := 42
-	result := MyFunction2()
-	if result != expected {
-		t.Errorf("MyFunction2() = %v; want %v", result, expected)
-	}
+	assert.Equal(t, 42, MyFunction2(), "MyFunction2() should return 42")
 }

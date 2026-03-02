@@ -86,6 +86,12 @@ go/
 
 ## Testing
 
+Use [Testify](https://github.com/stretchr/testify) for assertions and mocking.
+
+```bash
+go get github.com/stretchr/testify
+```
+
 Go discovers tests in `*_test.go` files. Test functions should use the `TestXxx` naming pattern.
 
 ```bash
