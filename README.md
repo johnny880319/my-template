@@ -58,6 +58,16 @@ lefthook install
 
 Hook config lives in `lefthook.yml`.
 
+## Set up GitHub Actions CI
+
+This template includes language-specific CI workflows:
+
+- `python-ci.yml`: runs `ruff`, `pyright`, and `pytest` for `python/`
+- `go-ci.yml`: runs `golangci-lint` and `go test` for `go/`
+
+The workflows trigger on `push` and `pull_request` to `main`, with path filters for this monorepo layout.
+If you move language code to repository root, update or remove the workflow path filters and working directories.
+
 ### VS Code integration
 Install **GitLens** and **Git Graph** extensions for advanced Git UI.
 

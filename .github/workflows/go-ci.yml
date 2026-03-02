@@ -1,0 +1,45 @@
+# NOTE:
+# This workflow is designed for a monorepo layout where Go code lives in `go/`.
+# If Go files are moved to repository root:
+# 1) Remove `on.push.paths` / `on.pull_request.paths`.
+# 2) Remove `defaults.run.working-directory`.
+# 3) Update `go-version-file`, `cache-dependency-path`, and linter `working-directory`.
+
+name: Go CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'go/**'
+      - '.github/workflows/go-ci.yml'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'go/**'
+      - '.github/workflows/go-ci.yml'
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./go
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go/go.mod'
+          cache-dependency-path: 'go/go.sum'
+
+      - name: Lint and Format Check
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v2.10.1
+          working-directory: go
+      - name: Run tests
+        run: go test -v -race -cover ./...
