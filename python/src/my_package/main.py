@@ -21,6 +21,8 @@ def run() -> None:
         err_msg = f"Expected 42, got '{my_function_2()}'"
         raise ValueError(err_msg)
 
+    print("All tests passed successfully!")  # noqa: T201
+
 
 if __name__ == "__main__":
     run()

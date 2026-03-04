@@ -109,16 +109,16 @@ This project uses the standard Python `src` layout.
 
 ```
 my_python_project/
-├── .venv/                  
+├── .venv/
 ├── src/
-│   └── my_package/         
-│       ├── __init__.py    
-│       └── main.py         
+│   └── my_package/
+│       ├── __init__.py
+│       └── main.py
 ├── tests/
-│   ├── __init__.py         
-│   └── test_main.py  
-├── .gitignore                   
-├── .python-version         
+│   ├── __init__.py
+│   └── test_main.py
+├── .gitignore
+├── .python-version
 ├── pyproject.toml
 ├── README.md
 └── uv.lock
@@ -157,13 +157,13 @@ Install the **Jupyter** extension for notebook support.
 ## Dockerfile (Podman/Docker)
 
 This template includes `python/Dockerfile` and `python/.dockerignore`.
+Run these commands from the `python/` directory:
 
 ```bash
-# Build from repository root
-podman build -f python/Dockerfile -t my-python-app ./python
+podman build -t localhost/my-python-app .
 
 # Run
-podman run --rm my-python-app
+podman run --rm localhost/my-python-app
 ```
 
 Note:
