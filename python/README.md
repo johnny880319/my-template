@@ -153,3 +153,19 @@ Install the **Jupyter** extension for notebook support.
   "notebook.output.scrolling": true
 }
 ```
+
+## Dockerfile (Podman/Docker)
+
+This template includes `python/Dockerfile` and `python/.dockerignore`.
+
+```bash
+# Build from repository root
+podman build -f python/Dockerfile -t my-python-app ./python
+
+# Run
+podman run --rm my-python-app
+```
+
+Note:
+- The Dockerfile uses `ENTRYPOINT ["python", "-m"]` + `CMD ["my_package.main"]`.
+- Override `CMD` to run a different module without rebuilding the image.
