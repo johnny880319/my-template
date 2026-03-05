@@ -19,12 +19,6 @@ git config --local user.email "your.email@example.com"
 touch README.md Makefile .gitignore
 ```
 
-### VS Code integration
-
-```bash
-mkdir -p .vscode && touch .vscode/settings.json
-```
-
 ## First commit and push
 
 Stage and commit locally:
@@ -68,9 +62,6 @@ This template includes language-specific CI workflows:
 The workflows trigger on `push` and `pull_request` to `main`, with path filters for this monorepo layout.
 If you move language code to repository root, update or remove the workflow path filters and working directories.
 
-### VS Code integration
-Install **GitLens** and **Git Graph** extensions for advanced Git UI.
-
 ## Conventional workflow
 
 Follow these industry standards for collaboration and versioning:
@@ -79,3 +70,10 @@ Follow these industry standards for collaboration and versioning:
 2. [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 3. [Semantic Versioning](https://semver.org/)
 4. [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+
+## VS Code integration
+
+Install **GitLens** and **Git Graph** extensions for advanced Git UI.
+Install the **Jupyter** extension for notebook support.
+
+VS Code settings lives in `.vscode/settings.json`.

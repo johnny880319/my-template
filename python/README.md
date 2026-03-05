@@ -1,24 +1,24 @@
 # My routine of starting a python project
 
-## Manage environments
+All commands should be run from the `python/` directory. Adjust paths as needed if you change the structure.
 
-### Install UV (If you don't have it already)
+## Initialize a project
 
 [UV](https://astral.sh/uv) is a blazingly fast Python package manager written in Rust, replacing pip and virtualenv.
 
-Install on Linux/macOS (check docs for Windows):
+Install on Linux/macOS if you do not have it already (check docs for Windows):
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### Create a new project
-
-Initialize a project:
+Initialize a project with current settings:
 
 ```bash
-uv init
+uv sync
 ```
+
+## Manage dependencies
 
 Manage dependencies:
 
@@ -43,61 +43,17 @@ uv sync --locked
 
 ## Linting, type checking and formatting
 
-Install [ruff](https://github.com/charliermarsh/ruff) and [pyright](https://github.com/microsoft/pyright) as linters and type checkers (pyright[nodejs] includes a standalone Node environment for stability):
-
-```bash
-uv add --dev ruff "pyright[nodejs]"
-```
-
-**Add** to `pyproject.toml`:
-
-```toml
-[tool.ruff]
-line-length = 120
-fix = true
-exclude = [
-    ".venv",
-    "libs",
-]
-
-[tool.ruff.lint]
-# select all rules except the ones that conflict with others rules or formatters.
-select = ["ALL"]
-ignore = [
-    "D203", # incorrect-blank-line-before-class, conflicts with D211
-    "D213", # multi-line-summary-second-line, conflicts with D212
-    "COM812", # missing-trailing-comma, conflicts with formatters
-]
-
-[tool.pyright]
-typeCheckingMode = "strict"
-```
+We use [ruff](https://github.com/charliermarsh/ruff) and [pyright](https://github.com/microsoft/pyright) as linters and type checkers (pyright[nodejs] includes a standalone Node environment for stability):
 
 To run these tools from the command line:
 
 ```bash
-uv run ruff check <file_or_dir>
 uv run ruff check --fix <file_or_dir>
 uv run ruff format <file_or_dir>
 uv run pyright <file_or_dir>
 ```
 
-### VS Code integration
-Install the **Ruff** and **Pyright** extensions for editor support.
-
-**Add** to `.vscode/settings.json`
-
-```json
-{
-  "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff",
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit"
-    }
-  }
-}
-```
+Lint config lives in `pyproject.toml`.
 
 ## Project structure
 
@@ -107,33 +63,32 @@ This project uses the standard Python `src` layout.
 * **`tests/`**: Contains all unit and integration tests.
 * **`./`**: Configuration files and documentation.
 
-```
-my_python_project/
-├── .venv/
-├── src/
-│   └── my_package/
-│       ├── __init__.py
-│       └── main.py
-├── tests/
-│   ├── __init__.py
-│   └── test_main.py
-├── .gitignore
-├── .python-version
-├── pyproject.toml
-├── README.md
-└── uv.lock
-```
-
 ## Testing
 
-Install [`pytest`](https://docs.pytest.org/) for unit testing.
+This template uses [`pytest`](https://docs.pytest.org/) for unit testing.
+
+**Naming conventions:** `pytest` automatically discovers tests. Ensure your test files are named `test_*.py` (or `*_test.py`) and your test functions start with `test_`.
+
+To run the tests:
 
 ```bash
-uv add --dev pytest
+uv run pytest
 ```
 
-**Naming conventions:** `pytest` automatically discovers tests. Ensure your test files are named `test_*.py` (or `*_test.py`) and your test functions start with `test_`. To run the tests, simply execute `uv run pytest`.
+## Dockerfile (Podman/Docker)
 
+To build and run the Docker image:
+
+```bash
+podman build -t localhost/my-python-app .
+podman run --rm localhost/my-python-app
+```
+
+Dockerfile template lives in `Dockerfile` and `.dockerignore`.
+
+Note:
+- The Dockerfile uses `ENTRYPOINT ["python", "-m"]` + `CMD ["my_package.main"]`.
+- Override `CMD` to run a different module without rebuilding the image.
 
 ## Jupyter Notebook support
 
@@ -143,29 +98,9 @@ Install [ipykernel](https://ipykernel.readthedocs.io/) for Jupyter Notebook supp
 uv add --dev ipykernel
 ```
 
-### VS Code integration
+## VS Code integration
+
+Install the **Ruff** and **Pyright** extensions for linting support.
 Install the **Jupyter** extension for notebook support.
 
-**Add** to `.vscode/settings.json` for output scrolling:
-
-```json
-{
-  "notebook.output.scrolling": true
-}
-```
-
-## Dockerfile (Podman/Docker)
-
-This template includes `python/Dockerfile` and `python/.dockerignore`.
-Run these commands from the `python/` directory:
-
-```bash
-podman build -t localhost/my-python-app .
-
-# Run
-podman run --rm localhost/my-python-app
-```
-
-Note:
-- The Dockerfile uses `ENTRYPOINT ["python", "-m"]` + `CMD ["my_package.main"]`.
-- Override `CMD` to run a different module without rebuilding the image.
+VS Code settings lives in `../.vscode/settings.json`.

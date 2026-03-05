@@ -1,8 +1,10 @@
 # My Routine For Starting a Go Project
 
-## Create a module
+All commands should be run from the `go/` directory. Adjust paths as needed if you change the structure.
 
-From the `go/` directory, initialize the module (replace with your real repository path):
+## Initialize a project
+
+Initialize the module (replace with your real repository path):
 
 ```bash
 go mod init github.com/<github-username>/<project-name>/go
@@ -34,26 +36,7 @@ Run checks:
 golangci-lint run
 ```
 
-Lint config lives in `go/.golangci.yml`.
-
-### VS Code integration
-
-Install the **Go** extension (`golang.go`), then add this to `.vscode/settings.json`:
-
-```json
-{
-  "[go]": {
-    "editor.defaultFormatter": "golang.go",
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-    }
-  },
-  "go.useLanguageServer": true,
-  "go.lintTool": "golangci-lint",
-  "go.lintOnSave": "package"
-}
-```
+Lint config lives in `.golangci.yml`.
 
 ## Project structure
 
@@ -63,36 +46,13 @@ This template follows the common Go layout:
 - `internal/`: private code, importable only within this module
 - `pkg/`: reusable library code for external usage (optional)
 
-```
-go/
-├── cmd/
-│   └── my-app/
-│       ├── main.go
-│       └── main_test.go
-├── internal/
-│   └── my-module/
-│       ├── module.go
-│       └── module_test.go
-├── pkg/
-│   └── my-package/
-│       ├── package.go
-│       └── package_test.go
-├── .gitignore
-├── .golangci.yml
-├── README.md
-├── go.mod
-└── go.sum
-```
-
 ## Testing
 
-Use [Testify](https://github.com/stretchr/testify) for assertions and mocking.
+This template uses [Testify](https://github.com/stretchr/testify) for assertions and mocking.
 
-```bash
-go get github.com/stretchr/testify
-```
+**Naming convention**: Go test files should be named `*_test.go` and test functions should be named `TestXxx`.
 
-Go discovers tests in `*_test.go` files. Test functions should use the `TestXxx` naming pattern.
+To run tests:
 
 ```bash
 go test ./...
@@ -102,15 +62,14 @@ go test -cover ./...
 
 ## Dockerfile (Podman/Docker)
 
-This template includes `go/Dockerfile` and `go/.dockerignore`.
-Run these commands from the `go/` directory:
+To build and run the Docker image:
 
 ```bash
 podman build -t localhost/my-go-app .
-
-# Run
 podman run --rm localhost/my-go-app
 ```
+
+Dockerfile template lives in `Dockerfile` and `.dockerignore`.
 
 Notes:
 - This starter app is CLI-style, so `EXPOSE` is intentionally not enabled by default.
@@ -125,3 +84,9 @@ go install github.com/air-verse/air@latest
 air init
 air
 ```
+
+## VS Code integration
+
+Install the **Go** extension (`golang.go`) for linting, formatting, and test integration.
+
+VS Code settings lives in `../.vscode/settings.json`.
