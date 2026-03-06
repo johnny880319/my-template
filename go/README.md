@@ -74,6 +74,7 @@ Dockerfile template lives in `Dockerfile` and `.dockerignore`.
 Notes:
 - This starter app is CLI-style, so `EXPOSE` is intentionally not enabled by default.
 - Add `EXPOSE <port>` only when your app actually listens on that port.
+- The container runs as non-root `UID:GID 65532:65532`.
 
 ## Live reloading (optional)
 

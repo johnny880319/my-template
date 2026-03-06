@@ -89,6 +89,8 @@ Dockerfile template lives in `Dockerfile` and `.dockerignore`.
 Note:
 - The Dockerfile uses `ENTRYPOINT ["python", "-m"]` + `CMD ["my_package.main"]`.
 - Override `CMD` to run a different module without rebuilding the image.
+- Dependencies are isolated under `/opt/.venv`, separate from app code in `/app`.
+- The container runs as non-root `UID:GID 65532:65532`.
 
 ## Jupyter Notebook support
 

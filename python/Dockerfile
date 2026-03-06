@@ -22,17 +22,20 @@ RUN uv sync --locked --no-dev
 # Runtime stage
 FROM docker.io/library/python:3.12-slim
 
-RUN useradd -m -u 1000 appuser
-USER appuser
-
 WORKDIR /app
 
-COPY --from=builder --chown=appuser:appuser /opt/.venv /opt/.venv
-COPY --from=builder --chown=appuser:appuser /app /app
+RUN groupadd --system --gid 65532 nonroot && \
+    useradd --system --uid 65532 --gid nonroot --create-home --shell /bin/bash nonroot
+
+COPY --from=builder --chown=65532:65532 /opt/.venv /opt/.venv
+COPY --from=builder --chown=65532:65532 /app /app
 
 ENV PATH="/opt/.venv/bin:$PATH"
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+
+# Run as non-root for safer defaults.
+USER 65532:65532
 
 # Replace module path if your app entrypoint changes.
 ENTRYPOINT ["python", "-m"]

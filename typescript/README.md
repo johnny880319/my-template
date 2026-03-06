@@ -50,7 +50,7 @@ Use `pnpm install` to install dependencies from `package.json` and update `pnpm-
 
 ```bash
 pnpm install
-pnpm i --frozen-lockfile
+pnpm install --frozen-lockfile
 ```
 
 ## Linting, type checking and formatting
@@ -67,7 +67,6 @@ To run these tools from the command line:
 
 ```bash
 pnpm biome check --write <file-or-dir>
-pnpm biome format --write <file-or-dir>
 pnpm exec tsc --noEmit
 ```
 
@@ -93,7 +92,7 @@ To run the tests:
 pnpm vitest run
 ```
 
-## TODO: Dockerfile (Podman/Docker)
+## Dockerfile (Podman/Docker)
 
 To build and run the Docker image:
 
@@ -103,6 +102,12 @@ podman run --rm localhost/my-typescript-app
 ```
 
 Dockerfile template lives in `Dockerfile` and `.dockerignore`.
+
+Notes:
+- This starter app is CLI-style, so `EXPOSE` is intentionally not enabled by default.
+- The image compiles TypeScript to `dist/` during build and runs `dist/cli.js` at runtime.
+- Replace `CMD ["dist/cli.js"]` if your app entrypoint changes.
+- The container runs as non-root `UID:GID 65532:65532`.
 
 ## VS Code integration
 
