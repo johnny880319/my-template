@@ -8,7 +8,8 @@
     "[python]": {
         "editor.defaultFormatter": "charliermarsh.ruff",
         "editor.codeActionsOnSave": {
-            "source.fixAll": "explicit"
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
         }
     },
     // go
@@ -25,12 +26,12 @@
         "gofumpt": true,
         "ui.semanticTokens": true
     },
-    // typescript
-    "[typescript][typescriptreact]": {
+    // typescript, javascript, json, jsonc
+    "[typescript][javascript][json][jsonc]": {
         "editor.defaultFormatter": "biomejs.biome",
         "editor.codeActionsOnSave": {
             "source.fixAll.biome": "explicit",
             "source.organizeImports.biome": "explicit"
-        },
+        }
     }
 }
