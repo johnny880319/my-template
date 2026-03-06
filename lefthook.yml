@@ -5,19 +5,21 @@ pre-commit:
     python-lint:
       root: "python/"
       glob: "**/*.py"
-      run: uv run ruff check --fix {staged_files}
-      stage_fixed: true
-    python-format:
-      root: "python/"
-      glob: "**/*.py"
-      run: uv run ruff format {staged_files}
+      run: uv run ruff check --fix {staged_files} && uv run ruff format {staged_files}
       stage_fixed: true
 
     # go
-    go-lint:
+    go-lint-typecheck:
       root: "go/"
       glob: "**/*.go"
-      run: golangci-lint run
+      run: golangci-lint run --fix
+      stage_fixed: true
+
+    # typescript
+    typescript-lint:
+      root: "typescript/"
+      glob: "**/*.{ts,tsx}"
+      run: pnpm biome check --write {staged_files}
       stage_fixed: true
 
 pre-push:
@@ -38,3 +40,13 @@ pre-push:
       root: "go/"
       glob: "**/*.go"
       run: go test -short ./...
+
+    # typescript
+    typescript-typecheck:
+      root: "typescript/"
+      glob: "**/*.{ts,tsx}"
+      run: pnpm tsc --noEmit
+    typescript-test:
+      root: "typescript/"
+      glob: "**/*.{ts,tsx}"
+      run: pnpm vitest run
