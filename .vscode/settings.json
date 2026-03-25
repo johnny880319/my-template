@@ -26,6 +26,12 @@
         "gofumpt": true,
         "ui.semanticTokens": true
     },
+    // rust
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        "editor.formatOnSave": true
+    },
+    "rust-analyzer.check.command": "clippy",
     // typescript, javascript, json, jsonc
     "[typescript][javascript][json][jsonc]": {
         "editor.defaultFormatter": "biomejs.biome",

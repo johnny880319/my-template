@@ -1,5 +1,5 @@
 # NOTE:
-# These hooks assume a monorepo layout with `python-codebase/`, `go-codebase/`, and `typescript-codebase/` folders.
+# These hooks assume a monorepo layout with `python-codebase/`, `go-codebase/`, `rust-codebase/`, and `typescript-codebase/` folders.
 # If you rename folders or flatten language code to repository root, update each `root:` path below.
 
 pre-commit:
@@ -17,6 +17,18 @@ pre-commit:
       root: "go-codebase/"
       glob: "**/*.go"
       run: golangci-lint run --fix
+      stage_fixed: true
+
+    # rust
+    rust-lint:
+      root: "rust-codebase/"
+      glob: "**/*.rs"
+      run: cargo clippy --fix --allow-dirty --allow-staged
+      stage_fixed: true
+    rust-format:
+      root: "rust-codebase/"
+      glob: "**/*.rs"
+      run: cargo fmt
       stage_fixed: true
 
     # typescript
@@ -44,6 +56,12 @@ pre-push:
       root: "go-codebase/"
       glob: "**/*.go"
       run: go test -short ./...
+
+    # rust
+    rust-test:
+      root: "rust-codebase/"
+      glob: "**/*.rs"
+      run: cargo test
 
     # typescript
     typescript-typecheck:
