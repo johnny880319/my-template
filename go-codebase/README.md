@@ -1,13 +1,13 @@
 # My Routine For Starting a Go Project
 
-All commands should be run from the `go/` directory. Adjust paths as needed if you change the structure.
+All commands should be run from the `go-codebase/` directory. Adjust paths as needed if you change the structure.
 
 ## Initialize a project
 
 Initialize the module (replace with your real repository path):
 
 ```bash
-go mod init github.com/<github-username>/<project-name>/go
+go mod init github.com/<github-username>/<project-name>/go-codebase
 ```
 
 ## Manage dependencies

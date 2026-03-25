@@ -1,4 +1,4 @@
-module github.com/johnny880319/project-starters/go
+module github.com/johnny880319/my-template/go-codebase
 
 go 1.25.0
 

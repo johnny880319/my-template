@@ -1,50 +1,23 @@
-# My routine of starting a new project
+# my-template
 
-## Initialize git repository
+This repository is a starter kit for new codebases with Go, Python, Rust, and TypeScript templates.
 
-```bash
-git init
-```
-
-Set up project-specific Git identity:
+## Getting started
 
 ```bash
-git config --local user.name "Your Name"
-git config --local user.email "your.email@example.com"
+git clone git@github.com:johnny880319/my-template.git
+cd my-template
 ```
 
-## Create essential files
+## Post-copy setup
 
-```bash
-touch README.md Makefile .gitignore
-```
-
-## First commit and push
-
-Stage and commit locally:
-
-```bash
-git add .
-git commit -m "chore: initial commit"
-```
-
-Create an empty repository on GitHub first, then push your initial commit:
-
-```bash
-git remote add origin git@github.com:your-account/<your-project-name>.git
-git branch -M main
-git push -u origin main
-```
-
-## Set up Git hooks
-
-Install Lefthook if you haven't already:
+Install Lefthook if you do not have it:
 
 ```bash
 go install github.com/evilmartians/lefthook@latest
 ```
 
-Set up Git hooks with Lefthook:
+Install Git hooks:
 
 ```bash
 lefthook install
@@ -52,20 +25,15 @@ lefthook install
 
 Hook config lives in `lefthook.yml`.
 
-## Set up GitHub Actions CI
+## GitHub Actions CI
 
 This template includes language-specific CI workflows:
 
-- `python-ci.yml`: runs `ruff`, `pyright`, and `pytest` for `python/`
-- `go-ci.yml`: runs `golangci-lint` and `go test` for `go/`
-- `typescript-ci.yml`: runs `biome`, `tsc`, and `vitest` for `typescript/`
-
-The workflows trigger on `push` and `pull_request` to `main`, with path filters for this monorepo layout.
-If you move language code to repository root, update or remove the workflow path filters and working directories.
+- `python-ci.yml`: runs `ruff`, `pyright`, and `pytest` for `python-codebase/`
+- `go-ci.yml`: runs `golangci-lint` and `go test` for `go-codebase/`
+- `typescript-ci.yml`: runs `biome`, `tsc`, and `vitest` for `typescript-codebase/`
 
 ## Conventional workflow
-
-Follow these industry standards for collaboration and versioning:
 
 1. [GitHub Flow](https://docs.github.com/en/get-started/quickstart/github-flow)
 2. [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)

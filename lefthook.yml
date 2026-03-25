@@ -1,23 +1,27 @@
+# NOTE:
+# These hooks assume a monorepo layout with `python-codebase/`, `go-codebase/`, and `typescript-codebase/` folders.
+# If you rename folders or flatten language code to repository root, update each `root:` path below.
+
 pre-commit:
   parallel: true
   commands:
     # python
     python-lint:
-      root: "python/"
+      root: "python-codebase/"
       glob: "**/*.py"
       run: uv run ruff check --fix {staged_files} && uv run ruff format {staged_files}
       stage_fixed: true
 
     # go
     go-lint-typecheck:
-      root: "go/"
+      root: "go-codebase/"
       glob: "**/*.go"
       run: golangci-lint run --fix
       stage_fixed: true
 
     # typescript
     typescript-lint:
-      root: "typescript/"
+      root: "typescript-codebase/"
       glob: "**/*.{ts,tsx}"
       run: pnpm biome check --write {staged_files}
       stage_fixed: true
@@ -27,26 +31,26 @@ pre-push:
   commands:
     # python
     python-typecheck:
-      root: "python/"
+      root: "python-codebase/"
       glob: "**/*.py"
       run: uv run pyright
     python-test:
-      root: "python/"
+      root: "python-codebase/"
       glob: "**/*.py"
       run: uv run pytest
 
     # go
     go-test:
-      root: "go/"
+      root: "go-codebase/"
       glob: "**/*.go"
       run: go test -short ./...
 
     # typescript
     typescript-typecheck:
-      root: "typescript/"
+      root: "typescript-codebase/"
       glob: "**/*.{ts,tsx}"
       run: pnpm tsc --noEmit
     typescript-test:
-      root: "typescript/"
+      root: "typescript-codebase/"
       glob: "**/*.{ts,tsx}"
       run: pnpm vitest run

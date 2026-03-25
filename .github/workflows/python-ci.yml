@@ -1,9 +1,10 @@
 # NOTE:
-# This workflow is designed for a monorepo layout where Python code lives in `python/`.
+# This workflow is designed for a monorepo layout where Python code lives in `python-codebase/`.
 # If Python files are moved to repository root:
 # 1) Remove `on.push.paths` / `on.pull_request.paths`.
 # 2) Remove `defaults.run.working-directory`.
 # 3) Update `cache-dependency-glob` and `python-version-file` paths.
+# If the Python folder is renamed (for example `python-codebase/` -> `python-service/`), update all `python-codebase/...` paths below.
 
 name: Python CI
 
@@ -11,12 +12,12 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'python/**'
+      - 'python-codebase/**'
       - '.github/workflows/python-ci.yml'
   pull_request:
     branches: [ "main" ]
     paths:
-      - 'python/**'
+      - 'python-codebase/**'
       - '.github/workflows/python-ci.yml'
 
 jobs:
@@ -27,7 +28,7 @@ jobs:
       contents: read
     defaults:
       run:
-        working-directory: ./python
+        working-directory: ./python-codebase
 
     steps:
       - uses: actions/checkout@v6
@@ -36,12 +37,12 @@ jobs:
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          cache-dependency-glob: "python/uv.lock"
+          cache-dependency-glob: "python-codebase/uv.lock"
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          python-version-file: "python/.python-version"
+          python-version-file: "python-codebase/.python-version"
 
       - name: Sync dependencies
         run: uv sync --all-extras --dev --locked

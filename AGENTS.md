@@ -7,9 +7,10 @@ This repository is a starter kit for new codebases. Each language folder should 
 ## Repository layout
 
 - `README.md`: shared setup flow (git, basic project bootstrap)
-- `go/`: Go starter template
-- `python/`: Python starter template
-- `typescript/`: TypeScript starter template
+- `go-codebase/`: Go starter template
+- `python-codebase/`: Python starter template
+- `rust-codebase/`: Rust starter template
+- `typescript-codebase/`: TypeScript starter template
 
 ## Global rules for agents
 
@@ -17,7 +18,7 @@ This repository is a starter kit for new codebases. Each language folder should 
 - Keep docs command-first and concise.
 - When a command or file tree changes, update the corresponding README in the same folder.
 - Prefer stable tooling and reproducible setup instructions.
-- Prefer examples that run from each language directory (`cd go`, `cd python`, `cd typescript`) for consistency.
+- Prefer examples that run from each language directory (`cd go-codebase`, `cd python-codebase`, `cd rust-codebase`, `cd typescript-codebase`) for consistency.
 - Keep runtime demos explicit (for example, print a success message) so container smoke tests are easy.
 
 ## Template expansion rules
@@ -35,12 +36,12 @@ This repository is a starter kit for new codebases. Each language folder should 
 
 ## Go template conventions
 
-- Keep entrypoints in `go/cmd/<app-name>/`.
-- Keep private/internal code in `go/internal/`.
-- Put optional reusable libraries in `go/pkg/`.
+- Keep entrypoints in `go-codebase/cmd/<app-name>/`.
+- Keep private/internal code in `go-codebase/internal/`.
+- Put optional reusable libraries in `go-codebase/pkg/`.
 - Keep package names lowercase and simple.
 - Keep tests next to implementation files with `*_test.go` naming.
-- Validate changes from `go/` with:
+- Validate changes from `go-codebase/` with:
   - `go test ./...`
   - `go test -cover ./...`
   - `go fmt ./...`
@@ -49,8 +50,8 @@ This repository is a starter kit for new codebases. Each language folder should 
 ## Python template conventions
 
 - Use `uv` for dependency and environment management.
-- Keep source under `python/src/` and tests under `python/tests/`.
-- Validate changes from `python/` with:
+- Keep source under `python-codebase/src/` and tests under `python-codebase/tests/`.
+- Validate changes from `python-codebase/` with:
   - `uv sync`
   - `uv run ruff check .`
   - `uv run ruff format .`
@@ -60,9 +61,9 @@ This repository is a starter kit for new codebases. Each language folder should 
 ## TypeScript template conventions
 
 - Use `pnpm` for package management and scripts.
-- Keep source under `typescript/src/` and tests under `typescript/tests/`.
+- Keep source under `typescript-codebase/src/` and tests under `typescript-codebase/tests/`.
 - Use Biome as the default formatter+linter baseline for starter simplicity.
-- Validate changes from `typescript/` with:
+- Validate changes from `typescript-codebase/` with:
   - `pnpm install`
   - `pnpm run lint`
   - `pnpm run typecheck`
@@ -80,6 +81,6 @@ Before finishing a change:
 ## Container template policy
 
 - Use `Dockerfile` as the default filename (compatible with both Podman and Docker).
-- Keep container templates language-specific (`go/`, `python/`) instead of a shared generic file.
+- Keep container templates language-specific (`go-codebase/`, `python-codebase/`) instead of a shared generic file.
 - Prefer one practical baseline Dockerfile per language; add variants only when clearly needed.
 - Keep runtime assumptions explicit (entrypoint, env vars, exposed ports) and easy to override.

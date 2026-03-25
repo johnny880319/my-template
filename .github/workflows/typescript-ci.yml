@@ -1,9 +1,10 @@
 # NOTE:
-# This workflow is designed for a monorepo layout where TypeScript code lives in `typescript/`.
+# This workflow is designed for a monorepo layout where TypeScript code lives in `typescript-codebase/`.
 # If TypeScript files are moved to repository root:
 # 1) Remove `on.push.paths` / `on.pull_request.paths`.
 # 2) Remove `defaults.run.working-directory`.
 # 3) Update `cache-dependency-path` and any hard-coded paths.
+# If the TypeScript folder is renamed (for example `typescript-codebase/` -> `frontend/`), update all `typescript-codebase/...` paths below.
 
 name: TypeScript CI
 
@@ -11,12 +12,12 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "typescript/**"
+      - "typescript-codebase/**"
       - ".github/workflows/typescript-ci.yml"
   pull_request:
     branches: ["main"]
     paths:
-      - "typescript/**"
+      - "typescript-codebase/**"
       - ".github/workflows/typescript-ci.yml"
 
 jobs:
@@ -27,7 +28,7 @@ jobs:
       contents: read
     defaults:
       run:
-        working-directory: ./typescript
+        working-directory: ./typescript-codebase
 
     steps:
       - uses: actions/checkout@v6
@@ -42,7 +43,7 @@ jobs:
         with:
           node-version: 24
           cache: "pnpm"
-          cache-dependency-path: "typescript/pnpm-lock.yaml"
+          cache-dependency-path: "typescript-codebase/pnpm-lock.yaml"
 
       - name: Sync dependencies
         run: pnpm install --frozen-lockfile

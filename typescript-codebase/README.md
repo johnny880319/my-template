@@ -1,6 +1,6 @@
 # My Routine For Starting a TypeScript Project
 
-All commands should be run from the `typescript/` directory. Adjust paths as needed if you change the structure.
+All commands should be run from the `typescript-codebase/` directory. Adjust paths as needed if you change the structure.
 
 ## Initialize a project
 

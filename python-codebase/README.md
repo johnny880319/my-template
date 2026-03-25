@@ -1,6 +1,6 @@
 # My routine of starting a python project
 
-All commands should be run from the `python/` directory. Adjust paths as needed if you change the structure.
+All commands should be run from the `python-codebase/` directory. Adjust paths as needed if you change the structure.
 
 ## Initialize a project
 

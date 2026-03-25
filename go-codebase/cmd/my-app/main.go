@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	mymodule "github.com/johnny880319/project-starters/go/internal/my-module"
+	mymodule "github.com/johnny880319/my-template/go-codebase/internal/my-module"
 )
 
 func main() {
