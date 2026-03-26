@@ -1,6 +1,7 @@
 # NOTE:
 # These hooks assume a monorepo layout with `python-codebase/`, `go-codebase/`, `rust-codebase/`, and `typescript-codebase/` folders.
-# If you rename folders or flatten language code to repository root, update each `root:` path below.
+# If you rename folders, update each `root:` path below.
+# If you flatten language code to repository root, remove the `root:` field entirely (setting `root: "./"` will NOT work).
 
 pre-commit:
   parallel: true
@@ -20,15 +21,10 @@ pre-commit:
       stage_fixed: true
 
     # rust
-    rust-lint:
+    rust-lint-format:
       root: "rust-codebase/"
       glob: "**/*.rs"
-      run: cargo clippy --fix --allow-dirty --allow-staged
-      stage_fixed: true
-    rust-format:
-      root: "rust-codebase/"
-      glob: "**/*.rs"
-      run: cargo fmt
+      run: cargo fmt && cargo clippy --fix --allow-dirty --allow-staged && cargo clippy
       stage_fixed: true
 
     # typescript
